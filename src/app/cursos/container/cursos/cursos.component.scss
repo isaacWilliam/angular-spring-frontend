@@ -1,0 +1,17 @@
+::ng-deep{
+  .dataview-style .p-dataview-content {
+    border-radius: 8px;
+  }
+
+  .dataview-style .p-dataview-header {
+    border-radius: 8px;
+    background-color: var(--primary-colors);
+    color: var(--text-color)
+  }
+
+  .dataview-style .p-selectbutton .p-button.p-highlight {
+    background-color: var(--secondary-colors);
+  }
+
+}
+

@@ -1,0 +1,16 @@
+<p-toolbar styleClass="bg-primary-color-gradient padding-toolbar">
+  <div class="p-toolbar-group-start">
+    <p-button label="New" pRipple icon="pi pi-plus" class="mr-2" styleClass="p-button-secondary cursor-pointer shadow-2"></p-button>
+    <p-button label="Upload" icon="pi pi-upload" styleClass="p-button-primary cursor-pointer shadow-2"></p-button>
+  </div>
+  <div class="p-toolbar-group-end">
+    <p-button [icon]="localStorage['theme'] == 'saga-blue' ? 'pi pi-sun text-yellow-500' : 'pi pi-moon'" styleClass="hover:border-gray-400 shadow-1 cursor-pointer" [text]="true" (click)="trocarTema()" class="mr-2"></p-button>
+    <p-button icon="pi pi-calendar" styleClass="p-button-warning mr-2 shadow-1 cursor-pointer"></p-button>
+    <p-button icon="pi pi-times" styleClass="p-button-info shadow-1 cursor-pointer"></p-button>
+  </div>
+</p-toolbar>
+<app-toast></app-toast>
+<app-confirm-dialog></app-confirm-dialog>
+<div style="width: 80%; margin: auto">
+  <router-outlet></router-outlet>
+</div>

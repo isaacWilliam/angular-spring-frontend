@@ -1,0 +1,7 @@
+:host::ng-deep {
+  .padding-toolbar.p-toolbar {
+    @media screen and (max-width: 580px) {
+      padding: 0.5rem;
+    }
+  }
+}

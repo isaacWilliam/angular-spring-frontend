@@ -1,0 +1,21 @@
+[
+  {
+    "id": "1",
+    "nome": "Java-Script" ,
+    "category": "Frontend"
+  },
+  {
+    "id": "2",
+    "nome": "Angular" ,
+    "category": "Frontend"},
+  {
+    "id": "3",
+    "nome": "React" ,
+    "category": "Frontend"
+  },
+  {
+    "id": "4",
+    "nome": "Java Poo" ,
+    "category": "Backend"
+  }
+]

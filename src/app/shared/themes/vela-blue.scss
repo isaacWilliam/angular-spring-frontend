@@ -1,0 +1,81 @@
+@import "primeng/resources/themes/vela-blue/theme.css";
+
+:root{
+  --font-family: Ubuntu;
+  --primary-colors:  #963D5A;
+  --secondary-colors: #D3D0CB;
+  --terceary-colors: #41C5B7;
+  --text-color: #ffffff;
+  --text-secondary: #2C4251;
+  --bg-message: transparent;
+  --bg-selectButton: #2C4251;
+  .p-button {
+    border: 2px solid transparent;
+    transition-duration: 0.4s;
+    transition-property: transform;
+    &:hover{
+      transform: scale(1.06);
+    }
+    &:focus {
+      //box-shadow: 0 0 0 0.1rem #5e6d81;
+      box-shadow: none;
+    }
+  };
+  .p-button-primary {background-color: var(--primary-colors); color: var(--text-color); &:hover {color: #2C4251}};
+  .p-button-secondary {background-color: var(--secondary-colors); color: var(--text-secondary); &:hover {color: #963D5A}};
+  .p-button-terciary {background-color: #41C5B7};
+  .bg-primary-color {background: var(--primary-colors)};
+  .bg-primary-color-gradient {background: linear-gradient(to left, #101921, #1F2D40)};
+  .bg-secondary-color {background: var(--text-secondary)};
+  .bg-terciary-color {background: #41C5B7};
+  .p-button-danger {background-color: #93032E; color:#ffffff; &:hover {color: #D3D0CB}};
+  .p-button-success {background-color: #14453D; color: var(--text-color);};
+  .p-button-warning {background-color: #FA7E61; color: var(--text-color); &:hover {color: #2C4251}};
+  .p-button-info {background-color: #208AAE; color: var(--text-color); &:hover {color: #2C4251}};
+
+  .p-inputtext {
+    border-radius: 6px;
+    &:hover {
+      border-color: #6d7f94;
+    }
+    &:focus {
+      box-shadow: 0 0 0 0.1rem #5e6d81;
+      border-color: #5e6d81;
+    }
+  }
+
+  .p-dropdown {
+    border-radius: 6px;
+    &:hover {
+      border-color: #6d7f94;
+    }
+  }
+
+  .p-dropdown:not(.p-disabled).p-focus{
+    box-shadow: 0 0 0 0.1rem #5e6d81;
+    border-color: #5e6d81;
+  }
+
+  .p-dropdown .p-inputtext {
+    &:focus {
+      box-shadow: 0 0 0 0 transparent;
+      border-color: transparent;
+    }
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 2px transparent;
+    border-radius: 10px;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #D3D0CB;
+    border-radius: 10px;
+  }
+}
