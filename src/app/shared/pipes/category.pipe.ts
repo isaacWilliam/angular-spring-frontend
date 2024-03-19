@@ -6,12 +6,12 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 export class CategoryPipe implements PipeTransform {
 
-  transform(category: unknown): unknown {
+  transform(category: unknown): { label: string, icon: string } {
     switch (category){
-      case 'Frontend' : return 'pi pi-desktop';
-      case 'Backend' : return 'pi pi-code';
+      case  1: return {label: 'Backend',icon: 'pi pi-desktop'};
+      case  2: return {label: 'Frontend', icon: 'pi pi-code'};
+      default : return {label: 'Unknown',icon: 'pi pi-question'}
     }
-    return 'pi pi-desktop';
   }
 
 }

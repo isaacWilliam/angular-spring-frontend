@@ -31,8 +31,9 @@ export class CursoService {
   }
 
   save(curso: Curso){
+    console.log(curso)
     if(curso.id) return this.update(curso);
-    return this.create({dsNome: curso.dsNome, dsCategory: curso.dsCategory});
+    return this.create({dsNome: curso.dsNome, nmCategory: curso.nmCategory});
   }
 
   delete(id: number){

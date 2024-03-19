@@ -1,6 +1,6 @@
 export interface Curso {
   id: null;
   dsNome: string;
-  dsCategory: string;
+  nmCategory: string;
   fgStatus: string;
 }

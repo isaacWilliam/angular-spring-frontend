@@ -25,8 +25,8 @@
             <div class="text-2xl font-bold text-900">{{ curso.dsNome }}</div>
             <div class="flex align-items-center gap-3">
                 <span class="flex align-items-center gap-2">
-                  <i class="{{curso.dsCategory | category}}"></i>
-                  <span class="font-semibold">{{ curso.dsCategory }}</span>
+                  <i [ngClass]="(curso.nmCategory | category)?.icon"></i>
+                  <span class="font-semibold">{{ (curso.nmCategory | category)?.label}}</span>
                 </span>
             </div>
           </div>

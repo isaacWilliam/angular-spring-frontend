@@ -19,8 +19,8 @@ export class CursoFormComponent implements OnInit{
   formGroup: FormGroup = new FormGroup({});
   loading: boolean = false;
   category = [
-    'Front-end',
-    'Back-end'
+    {label: 'Back-end', code: 1},
+    {label: 'Front-end', code: 2}
   ]
   constructor(
     // private formBuilder: UntypedFormBuilder,
@@ -41,9 +41,9 @@ export class CursoFormComponent implements OnInit{
 
   createForm(curso: Curso){
     this.formGroup = this.formBuilder.group({
-      id: [{value: curso.id, disabled: true}],
+      id: [curso.id],
       dsNome: [curso.dsNome, [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
-      dsCategory: [curso.dsCategory, [Validators.required, Validators.maxLength(10)]]
+      nmCategory: [curso.nmCategory, [Validators.required]]
     })
   }
 
@@ -51,7 +51,6 @@ export class CursoFormComponent implements OnInit{
     this.loading = true;
     // setTimeout(() => {
       this.loading = false;
-      this.formGroup.get('id')?.enable();
       this.service.save(this.formGroup.value).subscribe({
         next: (n: Curso) => {
           this.showSimpleToast('success', 'Sucesso', 'Curso salvo com sucesso.');
@@ -59,7 +58,6 @@ export class CursoFormComponent implements OnInit{
         },
         error: (e: any) => {
           this.showSimpleToast('error', 'Erro na Requisição', 'Retorne a página anterior.');
-          this.formGroup.get('id')?.disable();
         }
       });
     // }, 4000)

@@ -10,7 +10,7 @@
         <div class="col-12">
           <div class="flex flex-column gap-1">
             <label for="id">ID</label>
-            <input id="id" type="text" formControlName="id" class="w-8rem" pInputText/>
+            <input id="id" type="text" formControlName="id" class="w-8rem" pInputText readonly/>
           </div>
         </div>
         <div class="col-12 sm:col-6 ">
@@ -23,7 +23,7 @@
         <div class="col-12 sm:col-6">
           <div class="flex flex-column flex-column gap-1">
             <label for="category">Categoria</label>
-            <p-dropdown formControlName="dsCategory" [options]="category" styleClass="w-12rem" placeholder="Selecione" id="category"></p-dropdown>
+            <p-dropdown formControlName="nmCategory" [options]="category" optionLabel="label" optionValue="code" styleClass="w-12rem" placeholder="Selecione" id="category"></p-dropdown>
           </div>
         </div>
       </div>
