@@ -15,6 +15,7 @@ export const cursoResolver: ResolveFn<Curso> = (route: ActivatedRouteSnapshot): 
   return of({
     id: null,
     dsNome: '',
-    dsCategory: ''
+    dsCategory: '',
+    aulas: [],
   });
 };

@@ -1,12 +1,18 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {
+  NonNullableFormBuilder,
+  UntypedFormArray,
+  UntypedFormGroup,
+  Validators
+} from "@angular/forms";
 import {Location} from "@angular/common";
 
 import {CursoService} from "../../services/curso.service";
 import {MessageLayoutService} from "../../../shared/services/message.layout.service";
 import {ActivatedRoute} from "@angular/router";
 import {Curso} from "../../model/curso";
-
+import {Aula} from "../../model/aula";
+import {FormValidators} from "../../../shared/form-validators";
 @Component({
   selector: 'app-curso-form',
   templateUrl: './curso-form.component.html',
@@ -16,16 +22,14 @@ import {Curso} from "../../model/curso";
 export class CursoFormComponent implements OnInit{
 
   // formGroup: UntypedFormGroup = new UntypedFormGroup({});
-  formGroup: FormGroup = new FormGroup({});
+  form!: UntypedFormGroup;
   loading: boolean = false;
   category = [
     {label: 'Back-end', code: 1},
     {label: 'Front-end', code: 2}
   ]
   constructor(
-    // private formBuilder: UntypedFormBuilder,
-    // private formBuilder: NonNullableFormBuilder,
-    private formBuilder: FormBuilder,
+    private formBuilder: NonNullableFormBuilder,
     private service: CursoService,
     private messageLayoutService: MessageLayoutService,
     private location: Location,
@@ -40,27 +44,66 @@ export class CursoFormComponent implements OnInit{
   }
 
   createForm(curso: Curso){
-    this.formGroup = this.formBuilder.group({
+    this.form = this.formBuilder.group({
       id: [curso.id],
       dsNome: [curso.dsNome, [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
-      nmCategory: [curso.nmCategory, [Validators.required]]
+      nmCategory: [curso.nmCategory, [Validators.required]],
+      aulas: this.formBuilder.array(this.obterAulas(curso), Validators.required),
+    })
+
+  }
+
+  private obterAulas(curso: Curso): any {
+    const aulas = [];
+    if(curso?.aulas) {
+      curso.aulas.forEach(aula => aulas.push(this.createAula(aula)))
+    } else {
+      aulas.push(this.createAula())
+    }
+    return aulas;
+  }
+
+  private createAula(aula: Aula = {id: 0, dsNome: '', dsYouTube: ''}) {
+    return this.formBuilder.group({
+      id: [aula.id],
+      dsNome: [aula.dsNome, [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
+      dsYouTube: [aula.dsYouTube, [Validators.required]]
     })
   }
 
+  getAulasFormaArray() {
+    return (<UntypedFormArray>this.form.get('aulas')).controls
+
+  }
+
+  addNovaAula() {
+    const aula = this.form.get('aulas') as UntypedFormArray;
+    aula.push(this.createAula());
+  }
+
+  deleteAula(index: number) {
+    const aula = this.form.get('aulas') as UntypedFormArray;
+    aula.removeAt(index);
+  }
   enviar(){
     this.loading = true;
-    // setTimeout(() => {
-      this.loading = false;
-      this.service.save(this.formGroup.value).subscribe({
-        next: (n: Curso) => {
-          this.showSimpleToast('success', 'Sucesso', 'Curso salvo com sucesso.');
-          this.cancel();
-        },
-        error: (e: any) => {
-          this.showSimpleToast('error', 'Erro na Requisição', 'Retorne a página anterior.');
-        }
-      });
-    // }, 4000)
+      if (this.form.valid) {
+        console.log('true')
+        this.service.save(this.form.value).subscribe({
+          next: (n: Curso) => {
+            this.showSimpleToast('success', 'Sucesso', 'Curso salvo com sucesso.');
+            this.loading = false;
+            this.cancel();
+          },
+          error: (e: any) => {
+            this.loading = false;
+            this.showSimpleToast('error', 'Erro na Requisição', 'Retorne a página anterior.');
+          }
+        });
+      } else {
+        FormValidators.setTouchAllInputs(this.form);
+        this.loading = false;
+      }
 
   }
   showSimpleToast(severity: string, summary: string, detail: string){
@@ -71,26 +114,8 @@ export class CursoFormComponent implements OnInit{
     this.location.back();
   }
 
-  getError(control: string): string | undefined {
-    const campo = this.formGroup.get(control);
-    if (campo?.hasError('required')){
-      return 'Campo Obrigatório!';
-    }
-
-    if (campo?.errors && campo.hasError('minlength')){
-      return campo.errors['minlength']['actualLength'] ? `Precisa de mais ${(5 - campo.errors['minlength']['actualLength'])} caracter` : `Precisa de 5 caracter.`;
-    }
-
-    if (campo?.hasError('maxlength')){
-      return `Precisa ter no máximo 100 caracteres.`;
-    }
-
-    return 'Campo inválido!'
-
+  getValidForm(control: any){
+    return FormValidators.getStatusValidForm(control)
   }
 
-  getValidForm(control: string){
-    const campo = this.formGroup.get(control);
-     return campo && campo.errors && campo.touched;
-  }
 }

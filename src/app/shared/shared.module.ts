@@ -5,12 +5,14 @@ import {CategoryPipe} from "./pipes/category.pipe";
 import {ToastComponent} from "./components/toast/toast.component";
 import {ConfirmationService} from "primeng/api";
 import {ConfirmDialogModalComponent} from './components/confirm-dialog-modal/confirm-dialog-modal.component'
+import {FormErrorComponent} from "./components/form-error/form-error.component";
 
 @NgModule({
   declarations: [
     CategoryPipe,
     ToastComponent,
-    ConfirmDialogModalComponent
+    ConfirmDialogModalComponent,
+    FormErrorComponent
   ],
   imports: [
     CommonModule,
@@ -20,7 +22,8 @@ import {ConfirmDialogModalComponent} from './components/confirm-dialog-modal/con
     PrimeNgModule,
     CategoryPipe,
     ToastComponent,
-    ConfirmDialogModalComponent
+    ConfirmDialogModalComponent,
+    FormErrorComponent
   ],
   providers: [
     ConfirmationService

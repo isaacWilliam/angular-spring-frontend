@@ -1,5 +1,5 @@
 <div class="flex flex-row justify-content-center scalein animation-duration-500" style="width: 80vw; margin: 15px auto">
-  <form [formGroup]="formGroup">
+  <form [formGroup]="form" class="w-full" style="max-width: 1600px">
     <div class="bg-primary-color-gradient border-round-lg px-3 pt-3 shadow-2">
       <div class="grid">
         <div class="col-12">
@@ -13,22 +13,73 @@
             <input id="id" type="text" formControlName="id" class="w-8rem" pInputText readonly/>
           </div>
         </div>
-        <div class="col-12 sm:col-6 ">
+        <div class="col-12 sm:col-6 h-6rem">
           <div class="flex flex-column gap-1">
             <label for="username">Nome</label>
-            <input id="username" type="text" formControlName="dsNome" [class.ng-invalid]="getValidForm('dsNome')" pInputText/>
-            <span *ngIf="getValidForm('dsNome')" class="pl-1">* {{getError('dsNome')}}</span>
+            <input id="username" type="text" formControlName="dsNome" [class.ng-invalid]="getValidForm(form.controls['dsNome'])" pInputText/>
+            <ng-template [ngIf]="getValidForm(form.get('dsNome'))">
+              <app-form-error [control]="form.get('dsNome')" title="Nome"></app-form-error>
+            </ng-template>
           </div>
         </div>
         <div class="col-12 sm:col-6">
           <div class="flex flex-column flex-column gap-1">
             <label for="category">Categoria</label>
             <p-dropdown formControlName="nmCategory" [options]="category" optionLabel="label" optionValue="code" styleClass="w-12rem" placeholder="Selecione" id="category"></p-dropdown>
+            <ng-template [ngIf]="getValidForm(form.get('nmCategory'))">
+              <app-form-error [control]="form.get('nmCategory')" title="Categoria"></app-form-error>
+            </ng-template>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <div class="border-round-lg p-2 text-xl font-bold mb-1 text-center bg-primary-color">
+            <span class="m-0 pr-2" style="color: var(--secondary-colors)">Aulas</span>
+            <p-button icon="pi pi-plus" [rounded]="true" [text]="true" [raised]="true" severity="secondary" (click)="addNovaAula()"></p-button>
+          </div>
+          <div class="card">
+            <p-table formArrayName="aulas" [value]="getAulasFormaArray()" styleClass="p-datatable-lg">
+              <ng-template pTemplate="header">
+                <tr>
+                  <th>Nome</th>
+                  <th>URL</th>
+                  <th></th>
+                </tr>
+              </ng-template>
+              <ng-template pTemplate="body" let-rowIndex="rowIndex">
+                <tr [formGroupName]="rowIndex">
+                  <td>
+                    <div class="flex flex-column gap-1 h-4rem">
+                      <input pInputText id="name" aria-describedby="username-help" formControlName="dsNome" [class.ng-invalid]="getValidForm(getAulasFormaArray()[rowIndex].get('dsNome'))"/>
+                      <ng-template [ngIf]="getValidForm(getAulasFormaArray()[rowIndex].get('dsNome'))">
+                        <app-form-error [control]="getAulasFormaArray()[rowIndex].get('dsNome')" title="Nome"></app-form-error>
+                      </ng-template>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="flex flex-column gap-1 h-4rem">
+                      <input pInputText id="youtube" aria-describedby="help" formControlName="dsYouTube" type="url" [class.ng-invalid]="getValidForm(getAulasFormaArray()[rowIndex].get('dsYouTube'))"/>
+                      <ng-template [ngIf]="getValidForm(getAulasFormaArray()[rowIndex].get('dsYouTube'))">
+                        <app-form-error [control]="getAulasFormaArray()[rowIndex].get('dsYouTube')" title="URL"></app-form-error>
+                      </ng-template>
+                    </div>
+                  </td>
+                  <td class="vertical-align-text-top">
+                    <button pButton icon="pi pi-trash" class="md:align-self-end p-button-rounded p-button-danger cursor-pointer" (click)="deleteAula(rowIndex)"></button>
+                  </td>
+                </tr>
+              </ng-template>
+            </p-table>
+            <ng-template [ngIf]="getValidForm(form.get('aulas'))">
+              <div class="mt-1 ml-1">
+                <app-form-error [control]="form.get('aulas')" title="Pelo menos uma aula"></app-form-error>
+              </div>
+            </ng-template>
           </div>
         </div>
       </div>
       <div class="flex justify-content-center py-3 mt-2 bg-primary-color-gradient gap-2">
-        <p-button label="Salvar" pRipple type="button" styleClass="shadow-2" icon="pi pi-check" (click)="enviar()" [outlined]="true" [loading]="loading" [disabled]="formGroup.invalid" severity="success"></p-button>
+        <p-button label="Salvar" pRipple type="button" styleClass="shadow-2" icon="pi pi-check" (click)="enviar()" [outlined]="true" [loading]="loading" severity="success"></p-button>
         <button pButton pRipple type="button" label="Cancelar" class="shadow-2 p-button-secondary" icon="pi pi-times" (click)="cancel()"></button>
       </div>
     </div>

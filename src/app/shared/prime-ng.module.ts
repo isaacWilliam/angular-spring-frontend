@@ -13,6 +13,7 @@ import {RippleModule} from "primeng/ripple";
 import {AnimateModule} from "primeng/animate";
 import {ToastModule} from "primeng/toast";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
+import {TableModule} from "primeng/table";
 
 @NgModule({
   exports: [
@@ -29,7 +30,8 @@ import {ConfirmDialogModule} from "primeng/confirmdialog";
     RippleModule,
     AnimateModule,
     ToastModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    TableModule
   ]
 })
 export class PrimeNgModule { }
