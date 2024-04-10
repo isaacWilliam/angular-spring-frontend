@@ -1,5 +1,5 @@
 export interface Aula {
-  id: number;
+  id: number | null;
   dsNome: string;
   dsYouTube: string
 }

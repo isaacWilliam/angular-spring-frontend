@@ -1,4 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {CursoPage} from "../../model/curso-page";
+import {Curso} from "../../model/curso";
 
 @Component({
   selector: 'app-cursos-list',
@@ -7,7 +9,7 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 })
 export class CursosListComponent {
 
-  @Input() cursos = [];
+  @Input() cursos: Curso[] = [];
   @Output() retornoDelete = new EventEmitter;
 
   deleteCurso(id: number){

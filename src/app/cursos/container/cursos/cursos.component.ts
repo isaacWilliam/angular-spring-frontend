@@ -1,9 +1,10 @@
-import {Component, OnInit} from '@angular/core';
-import {Curso} from "../../model/curso";
+import {Component} from '@angular/core';
 import {CursoService} from "../../services/curso.service";
-import {catchError, map, Observable, of, Subject, take} from "rxjs";
+import {catchError, map, Observable, of, Subject, take, tap} from "rxjs";
 import {Message} from "primeng/api";
 import {MessageLayoutService} from "../../../shared/services/message.layout.service";
+import {CursoPage} from "../../model/curso-page";
+import {PaginatorState} from "primeng/paginator";
 
 @Component({
   selector: 'app-cursos',
@@ -13,7 +14,7 @@ import {MessageLayoutService} from "../../../shared/services/message.layout.serv
 
 export class CursosComponent{
 
-  cursos$: Observable<any> | null = null;
+  cursos$: Observable<CursoPage> | null = null;
   // cursos: Curso[] = [];
   error$ = new Subject<boolean>();
   messages: Message[] = [
@@ -28,7 +29,9 @@ export class CursosComponent{
     private cursoService: CursoService,
     private messageLayoutService: MessageLayoutService
   ) {
-    this.listar();
+    // setTimeout((e: any) => {
+      this.listar();
+    // }, 5000)
   }
 
   deleteCurso(id: number){
@@ -49,17 +52,15 @@ export class CursosComponent{
     this.messageLayoutService.showSimpleToast({severity, summary, detail})
   }
 
-  listar(){
-    this.cursos$ = this.cursoService.list().pipe(
+  listar(page: number = 0){
+    this.cursos$ = this.cursoService.list(page).pipe(
+      tap(() => {
+      }),
       catchError(err => {
         this.error$.next(true);
-        // this.showSimpleToast('error', 'Falha!!', 'Sua requisição não foi concluída.')
-        console.log(err);
-        // return empty();
-        return of();
+        return of({cursos: [],page: 0, size:0, totalPages: 0, totalElements: 0});
       }),
     )
-    // this.cursoService.list().subscribe(response => {this.cursos = response});
   }
 
 }

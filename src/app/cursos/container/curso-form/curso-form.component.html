@@ -50,7 +50,7 @@
                 <tr [formGroupName]="rowIndex">
                   <td>
                     <div class="flex flex-column gap-1 h-4rem">
-                      <input pInputText id="name" aria-describedby="username-help" formControlName="dsNome" [class.ng-invalid]="getValidForm(getAulasFormaArray()[rowIndex].get('dsNome'))"/>
+                      <input pInputText formControlName="dsNome" [class.ng-invalid]="getValidForm(getAulasFormaArray()[rowIndex].get('dsNome'))"/>
                       <ng-template [ngIf]="getValidForm(getAulasFormaArray()[rowIndex].get('dsNome'))">
                         <app-form-error [control]="getAulasFormaArray()[rowIndex].get('dsNome')" title="Nome"></app-form-error>
                       </ng-template>
@@ -58,7 +58,7 @@
                   </td>
                   <td>
                     <div class="flex flex-column gap-1 h-4rem">
-                      <input pInputText id="youtube" aria-describedby="help" formControlName="dsYouTube" type="url" [class.ng-invalid]="getValidForm(getAulasFormaArray()[rowIndex].get('dsYouTube'))"/>
+                      <input pInputText type="url" formControlName="dsYouTube" [class.ng-invalid]="getValidForm(getAulasFormaArray()[rowIndex].get('dsYouTube'))"/>
                       <ng-template [ngIf]="getValidForm(getAulasFormaArray()[rowIndex].get('dsYouTube'))">
                         <app-form-error [control]="getAulasFormaArray()[rowIndex].get('dsYouTube')" title="URL"></app-form-error>
                       </ng-template>

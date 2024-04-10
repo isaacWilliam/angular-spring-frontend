@@ -14,6 +14,7 @@ import {AnimateModule} from "primeng/animate";
 import {ToastModule} from "primeng/toast";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {TableModule} from "primeng/table";
+import {PaginatorModule} from "primeng/paginator";
 
 @NgModule({
   exports: [
@@ -31,7 +32,8 @@ import {TableModule} from "primeng/table";
     AnimateModule,
     ToastModule,
     ConfirmDialogModule,
-    TableModule
+    TableModule,
+    PaginatorModule
   ]
 })
 export class PrimeNgModule { }

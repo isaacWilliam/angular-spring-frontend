@@ -28,6 +28,7 @@ export class CursoFormComponent implements OnInit{
     {label: 'Back-end', code: 1},
     {label: 'Front-end', code: 2}
   ]
+  curso: any;
   constructor(
     private formBuilder: NonNullableFormBuilder,
     private service: CursoService,
@@ -39,14 +40,14 @@ export class CursoFormComponent implements OnInit{
   }
 
   ngOnInit(){
-    const curso = this.route.snapshot.data['curso'];
-    this.createForm(curso);
+    this.curso = this.route.snapshot.data['curso'];
+    this.createForm(this.curso);
   }
 
   createForm(curso: Curso){
     this.form = this.formBuilder.group({
       id: [curso.id],
-      dsNome: [curso.dsNome, [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
+      dsNome: [curso.dsNome, [Validators.required, Validators.minLength(4), Validators.maxLength(100)]],
       nmCategory: [curso.nmCategory, [Validators.required]],
       aulas: this.formBuilder.array(this.obterAulas(curso), Validators.required),
     })
@@ -63,11 +64,11 @@ export class CursoFormComponent implements OnInit{
     return aulas;
   }
 
-  private createAula(aula: Aula = {id: 0, dsNome: '', dsYouTube: ''}) {
+  private createAula(aula: Aula = {id: null, dsNome: '', dsYouTube: ''}) {
     return this.formBuilder.group({
       id: [aula.id],
-      dsNome: [aula.dsNome, [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
-      dsYouTube: [aula.dsYouTube, [Validators.required]]
+      dsNome: [aula.dsNome, [Validators.required, Validators.minLength(4), Validators.maxLength(100)]],
+      dsYouTube: [aula.dsYouTube, [Validators.required, Validators.minLength(5), Validators.maxLength(30)]]
     })
   }
 
@@ -88,7 +89,6 @@ export class CursoFormComponent implements OnInit{
   enviar(){
     this.loading = true;
       if (this.form.valid) {
-        console.log('true')
         this.service.save(this.form.value).subscribe({
           next: (n: Curso) => {
             this.showSimpleToast('success', 'Sucesso', 'Curso salvo com sucesso.');

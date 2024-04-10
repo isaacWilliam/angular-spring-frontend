@@ -1,0 +1,8 @@
+<div class="flex-auto">
+  <p-paginator (onPageChange)="onPageChange($event)"
+               [totalRecords]="totalRecord"
+               [rows]="10" [first]="first"
+               [pageLinkSize]="3"
+               [showCurrentPageReport]="true" currentPageReportTemplate="{first} - {last} de {totalRecords}"
+  ></p-paginator>
+</div>

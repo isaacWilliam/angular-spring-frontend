@@ -1,16 +1,10 @@
 <div class="p-1 sm:p-3">
-  <div *ngIf="cursos$ | async as cursos else loading">
-    <app-cursos-list [cursos]="cursos" (retornoDelete)="showConfirm($event)" ></app-cursos-list>
+  <div *ngIf="cursos$ | async as cursos else loading" class="flex flex-column">
+    <app-cursos-list [cursos]="cursos.cursos" (retornoDelete)="showConfirm($event)" ></app-cursos-list>
+    <div class="z-0">
+      <app-paginator [totalRecord]="cursos.totalElements" [totalPages]="cursos.totalPages" [pageAtual]="cursos.page" (pageChange)="listar($event)"></app-paginator>
+    </div>
   </div>
-<!--  <ng-template #loading>-->
-<!--    <div class="w-full flex flex-row justify-content-center align-items-center p-4" style="height: 80vh">-->
-<!--      <span class="text-lg pr-2">Carregando</span>-->
-<!--      <i class="mx-1 pi pi-circle-fill scalein animation-delay-300 animation-duration-1000 animation-iteration-infinite" style="color: var(&#45;&#45;primary-colors)"></i>-->
-<!--      <i class="mx-1 pi pi-circle-fill scalein animation-delay-400 animation-duration-1000 animation-iteration-infinite" style="color: var(&#45;&#45;secondary-colors)"></i>-->
-<!--      <i class="mx-1 pi pi-circle-fill scalein animation-delay-500 animation-duration-1000 animation-iteration-infinite" style="color: var(&#45;&#45;terceary-colors)"></i>-->
-<!--&lt;!&ndash;      <p-progressSpinner styleClass="w-4rem h-4rem" strokeWidth="4" aria-label="Loading" fill="var(&#45;&#45;surface-ground)" animationDuration=".9s"></p-progressSpinner>&ndash;&gt;-->
-<!--    </div>-->
-<!--  </ng-template>-->
 
   <ng-template #loading>
     <div class="p-3 w-full flex justify-content-center align-items-center border-round-lg" *ngIf="error$ | async; else loadingNoError" style="height: 70vh; background-color: var(--bg-message)">

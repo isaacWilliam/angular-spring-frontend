@@ -6,13 +6,15 @@ import {ToastComponent} from "./components/toast/toast.component";
 import {ConfirmationService} from "primeng/api";
 import {ConfirmDialogModalComponent} from './components/confirm-dialog-modal/confirm-dialog-modal.component'
 import {FormErrorComponent} from "./components/form-error/form-error.component";
+import {PaginatorComponent} from "./components/paginator/paginator.component";
 
 @NgModule({
   declarations: [
     CategoryPipe,
     ToastComponent,
     ConfirmDialogModalComponent,
-    FormErrorComponent
+    FormErrorComponent,
+    PaginatorComponent
   ],
   imports: [
     CommonModule,
@@ -23,7 +25,8 @@ import {FormErrorComponent} from "./components/form-error/form-error.component";
     CategoryPipe,
     ToastComponent,
     ConfirmDialogModalComponent,
-    FormErrorComponent
+    FormErrorComponent,
+    PaginatorComponent
   ],
   providers: [
     ConfirmationService
