@@ -32,6 +32,7 @@ export class CursosComponent{
     // setTimeout((e: any) => {
       this.listar();
     // }, 5000)
+    console.log(this.cursos$)
   }
 
   deleteCurso(id: number){
@@ -61,6 +62,7 @@ export class CursosComponent{
         return of({cursos: [],page: 0, size:0, totalPages: 0, totalElements: 0});
       }),
     )
+
   }
 
 }

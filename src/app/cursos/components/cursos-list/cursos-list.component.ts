@@ -1,5 +1,4 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {CursoPage} from "../../model/curso-page";
 import {Curso} from "../../model/curso";
 
 @Component({

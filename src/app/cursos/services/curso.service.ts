@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import {Curso} from "../model/curso";
 import {HttpClient} from "@angular/common/http";
-import {delay, first, take} from "rxjs";
+import {delay, first} from "rxjs";
 import {CursoPage} from "../model/curso-page";
-import {PaginatorState} from "primeng/paginator";
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +16,6 @@ export class CursoService {
   ) { }
 
   list(page: number = 0, pageSize = 10) {
-    console.log(page)
     return this.http.get<CursoPage>(this.API_URL, {params: {page, pageSize: pageSize}}).pipe(first());
   }
 
