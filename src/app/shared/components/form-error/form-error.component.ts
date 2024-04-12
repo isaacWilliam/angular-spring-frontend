@@ -1,10 +1,13 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {FormValidators} from "../../form-validators";
+import { NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-form-error',
-  templateUrl: './form-error.component.html',
-  styleUrls: ['./form-error.component.scss']
+    selector: 'app-form-error',
+    templateUrl: './form-error.component.html',
+    styleUrls: ['./form-error.component.scss'],
+    standalone: true,
+    imports: [NgIf]
 })
 export class FormErrorComponent{
 

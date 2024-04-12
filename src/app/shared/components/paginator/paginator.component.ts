@@ -1,10 +1,12 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {PaginatorState} from "primeng/paginator";
+import { PaginatorState, PaginatorModule } from "primeng/paginator";
 
 @Component({
-  selector: 'app-paginator',
-  templateUrl: './paginator.component.html',
-  styleUrls: ['./paginator.component.scss']
+    selector: 'app-paginator',
+    templateUrl: './paginator.component.html',
+    styleUrls: ['./paginator.component.scss'],
+    standalone: true,
+    imports: [PaginatorModule]
 })
 
 export class PaginatorComponent implements OnChanges{
@@ -15,7 +17,6 @@ export class PaginatorComponent implements OnChanges{
   @Output() pageChange = new EventEmitter();
 
   first = 0;
-
 
   ngOnChanges(changes: SimpleChanges) {
     this.first = this.pageAtual * 10;

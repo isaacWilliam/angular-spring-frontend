@@ -4,18 +4,23 @@ import {catchError, map, Observable, of, Subject, take, tap} from "rxjs";
 import {Message} from "primeng/api";
 import {MessageLayoutService} from "../../../shared/services/message.layout.service";
 import {CursoPage} from "../../model/curso-page";
-import {PaginatorState} from "primeng/paginator";
+import { AsyncPipe } from '@angular/common';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { MessagesModule } from 'primeng/messages';
+import { PaginatorComponent } from '../../../shared/components/paginator/paginator.component';
+import { CursosListComponent } from '../../components/cursos-list/cursos-list.component';
 
 @Component({
-  selector: 'app-cursos',
-  templateUrl: './cursos.component.html',
-  styleUrls: ['./cursos.component.scss']
+    selector: 'app-cursos',
+    templateUrl: './cursos.component.html',
+    styleUrls: ['./cursos.component.scss'],
+    standalone: true,
+    imports: [CursosListComponent, PaginatorComponent, MessagesModule, ProgressSpinnerModule, AsyncPipe]
 })
 
 export class CursosComponent{
 
   cursos$: Observable<CursoPage> | null = null;
-  // cursos: Curso[] = [];
   error$ = new Subject<boolean>();
   messages: Message[] = [
     {
@@ -32,7 +37,6 @@ export class CursosComponent{
     // setTimeout((e: any) => {
       this.listar();
     // }, 5000)
-    console.log(this.cursos$)
   }
 
   deleteCurso(id: number){

@@ -2,12 +2,15 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {MessageService} from "primeng/api";
 import {MessageLayoutService} from "../../services/message.layout.service";
 import {Subscription} from "rxjs";
+import { ToastModule } from 'primeng/toast';
 
 @Component({
-  selector: 'app-toast',
-  template: '<p-toast [breakpoints]="{\'920px\': {width: \'100%\', right: \'0\', left: \'0\'}}"></p-toast>',
-  styles: [':host::ng-deep{.p-toast-icon-close{ border: none}}'],
-  providers: [MessageService]
+    selector: 'app-toast',
+    template: '<p-toast [breakpoints]="{\'920px\': {width: \'100%\', right: \'0\', left: \'0\'}}"></p-toast>',
+    styles: [':host::ng-deep{.p-toast-icon-close{ border: none}}'],
+    providers: [MessageService],
+    standalone: true,
+    imports: [ToastModule]
 })
 
 export class ToastComponent implements OnInit, OnDestroy{

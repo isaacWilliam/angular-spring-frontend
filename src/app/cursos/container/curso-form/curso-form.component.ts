@@ -1,11 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {
-  NonNullableFormBuilder,
-  UntypedFormArray,
-  UntypedFormGroup,
-  Validators
-} from "@angular/forms";
-import {Location} from "@angular/common";
+import { NonNullableFormBuilder, UntypedFormArray, UntypedFormGroup, Validators, FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { Location, NgIf } from "@angular/common";
 
 import {CursoService} from "../../services/curso.service";
 import {MessageLayoutService} from "../../../shared/services/message.layout.service";
@@ -13,11 +8,20 @@ import {ActivatedRoute} from "@angular/router";
 import {Curso} from "../../model/curso";
 import {Aula} from "../../model/aula";
 import {FormValidators} from "../../../shared/form-validators";
+import { RippleModule } from 'primeng/ripple';
+import { SharedModule } from 'primeng/api';
+import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
+import { DropdownModule } from 'primeng/dropdown';
+import { FormErrorComponent } from '../../../shared/components/form-error/form-error.component';
+import { InputTextModule } from 'primeng/inputtext';
 @Component({
-  selector: 'app-curso-form',
-  templateUrl: './curso-form.component.html',
-  styleUrls: ['./curso-form.component.scss'],
-  preserveWhitespaces: true
+    selector: 'app-curso-form',
+    templateUrl: './curso-form.component.html',
+    styleUrls: ['./curso-form.component.scss'],
+    preserveWhitespaces: true,
+    standalone: true,
+    imports: [FormsModule, ReactiveFormsModule, InputTextModule, NgIf, FormErrorComponent, DropdownModule, ButtonModule, TableModule, SharedModule, RippleModule]
 })
 export class CursoFormComponent implements OnInit{
 

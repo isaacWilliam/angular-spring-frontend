@@ -1,20 +1,21 @@
 <div class="p-1 sm:p-3">
-  <div *ngIf="cursos$ | async as cursos else loading" class="flex flex-column">
-    <app-cursos-list [cursos]="cursos.cursos" (retornoDelete)="showConfirm($event)" ></app-cursos-list>
-    <div class="z-0">
-      <app-paginator [totalRecord]="cursos.totalElements" [totalPages]="cursos.totalPages" [pageAtual]="cursos.page" (pageChange)="listar($event)"></app-paginator>
+  @if(cursos$ | async; as cursos) {
+    <div class="flex flex-column">
+      <app-cursos-list [cursos]="cursos.cursos" (retornoDelete)="showConfirm($event)" ></app-cursos-list>
+      <div class="z-0">
+        <app-paginator [totalRecord]="cursos.totalElements" [totalPages]="cursos.totalPages" [pageAtual]="cursos.page" (pageChange)="listar($event)"></app-paginator>
+      </div>
     </div>
-  </div>
-
-  <ng-template #loading>
-    <div class="p-3 w-full flex justify-content-center align-items-center border-round-lg" *ngIf="error$ | async; else loadingNoError" style="height: 70vh; background-color: var(--bg-message)">
-      <p-messages [(value)]="messages" [enableService]="false" [closable]="false"></p-messages>
-    </div>
-    <ng-template #loadingNoError>
+  } @else {
+    @if(error$ | async) {
+      <div class="p-3 w-full flex justify-content-center align-items-center border-round-lg" style="height: 70vh; background-color: var(--bg-message)">
+        <p-messages [(value)]="messages" [enableService]="false" [closable]="false"></p-messages>
+      </div>
+    } @else {
       <div class="w-full flex flex-row justify-content-center align-items-center p-4" style="height: 70vh">
         <span class="pr-6">Carregando</span>
         <p-progressSpinner styleClass="w-4rem h-4rem" strokeWidth="6" fill="var(--surface-ground)" animationDuration="3s"></p-progressSpinner>
       </div>
-    </ng-template>
-  </ng-template>
+    }
+  }
 </div>
